@@ -15,6 +15,10 @@ variable "values_json" {
     { "string": "baz", "number": 3, "bool": false }
   ]
 EOF
+  validation {
+    condition = can(jsondecode(var.values_json))
+    error_message = "Values must be a valid JSON document."
+  }
 }
 
 locals {
